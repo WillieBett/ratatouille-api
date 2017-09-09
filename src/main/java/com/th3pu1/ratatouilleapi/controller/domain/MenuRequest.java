@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.boot.jackson.JsonComponent;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * Created by pchaivong on 9/3/2017 AD.
@@ -21,7 +22,30 @@ public class MenuRequest {
     @JsonProperty("price")
     private BigDecimal price;
 
+    @JsonProperty("ingredients")
+    private List<Long> ingredients;
+
+    @JsonProperty("toppings")
+    private List<Long> toppings;
+
     public MenuRequest() {
+    }
+
+
+    public List<Long> getToppings() {
+        return toppings;
+    }
+
+    public void setToppings(List<Long> toppings) {
+        this.toppings = toppings;
+    }
+
+    public List<Long> getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(List<Long> ingredients) {
+        this.ingredients = ingredients;
     }
 
     public String getName() {
