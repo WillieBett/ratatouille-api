@@ -1,6 +1,6 @@
 steps:
   - name: "gcr.io/cloud-builders/java/mvn"
-    env: ["PROJECT_ROOT/ratatouille-api"]
+    env: ["PROJECT_ROOT=ratatouille-api"]
     args: ["install", "."]
     id: "mvn-install"
 
