@@ -1,6 +1,6 @@
 package com.th3pu1.ratatouilleapi.service;
 
-import com.th3pu1.ratatouilleapi.controller.domain.CreateIngredientRequest;
+import com.th3pu1.ratatouilleapi.model.IngredientRequest;
 import com.th3pu1.ratatouilleapi.entity.Ingredient;
 import com.th3pu1.ratatouilleapi.repository.IngredientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +28,7 @@ public class IngredientService {
         return ingredients;
     }
 
-    public void addIngredient(CreateIngredientRequest request){
+    public void addIngredient(IngredientRequest request){
         Ingredient ingredient = new Ingredient();
         ingredient.setName(request.getName());
         ingredient.setPrice(request.getPrice());

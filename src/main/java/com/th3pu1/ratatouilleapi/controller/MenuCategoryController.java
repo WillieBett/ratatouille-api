@@ -1,7 +1,7 @@
 package com.th3pu1.ratatouilleapi.controller;
 
-import com.th3pu1.ratatouilleapi.controller.domain.MenuCategoryRequest;
-import com.th3pu1.ratatouilleapi.controller.domain.MenuCategoryResponse;
+import com.th3pu1.ratatouilleapi.model.MenuCategoryRequest;
+import com.th3pu1.ratatouilleapi.model.MenuCategoryResponse;
 import com.th3pu1.ratatouilleapi.entity.MenuCategory;
 import com.th3pu1.ratatouilleapi.service.MenuCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;

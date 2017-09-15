@@ -1,28 +1,24 @@
-package com.th3pu1.ratatouilleapi.controller.domain;
+package com.th3pu1.ratatouilleapi.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import org.springframework.boot.jackson.JsonComponent;
-
-import java.math.BigDecimal;
 
 /**
  * Created by pchaivong on 9/3/2017 AD.
  */
 
+@NoArgsConstructor
+@Getter
+@Setter
+@ToString
 @JsonComponent
 public class MenuResponse extends MenuRequest{
 
     @JsonProperty("id")
     private Long id;
 
-    public MenuResponse() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 }

@@ -1,8 +1,7 @@
 package com.th3pu1.ratatouilleapi.controller;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.th3pu1.ratatouilleapi.controller.domain.CreateIngredientRequest;
-import com.th3pu1.ratatouilleapi.controller.domain.IngredientResponse;
+import com.th3pu1.ratatouilleapi.model.IngredientRequest;
+import com.th3pu1.ratatouilleapi.model.IngredientResponse;
 import com.th3pu1.ratatouilleapi.entity.Ingredient;
 import com.th3pu1.ratatouilleapi.service.IngredientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,7 +58,7 @@ public class IngredientController {
 
     @RequestMapping(value = "/ingredients", method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.CREATED, code = HttpStatus.CREATED)
-    public void createIngredient(@RequestBody CreateIngredientRequest request){
+    public void createIngredient(@RequestBody IngredientRequest request){
         ingredientService.addIngredient(request);
     }
 
@@ -77,7 +76,7 @@ public class IngredientController {
     @RequestMapping(value = "/ingredients/{id}", method = RequestMethod.PUT)
     @ResponseStatus(value = HttpStatus.NO_CONTENT, code = HttpStatus.NO_CONTENT)
     @Transactional
-    public void updateIngredient(@PathVariable Long id, @RequestBody CreateIngredientRequest request){
+    public void updateIngredient(@PathVariable Long id, @RequestBody IngredientRequest request){
         Ingredient ingredient = ingredientService.getIngredient(id);
         if(ingredient!=null){
             if (request.getName() != null)

@@ -1,13 +1,11 @@
 package com.th3pu1.ratatouilleapi.controller;
 
-import com.th3pu1.ratatouilleapi.controller.domain.MenuRequest;
-import com.th3pu1.ratatouilleapi.controller.domain.MenuResponse;
+import com.th3pu1.ratatouilleapi.model.MenuRequest;
+import com.th3pu1.ratatouilleapi.model.MenuResponse;
 import com.th3pu1.ratatouilleapi.entity.Ingredient;
 import com.th3pu1.ratatouilleapi.entity.Menu;
-import com.th3pu1.ratatouilleapi.repository.IngredientRepository;
 import com.th3pu1.ratatouilleapi.service.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
