@@ -31,7 +31,7 @@ public class MenuController {
      * @return List<MenuResponse>
      */
     @CrossOrigin("*")
-    @RequestMapping(value = "/menus", method = RequestMethod.GET)
+    @RequestMapping(value = "/api/menus", method = RequestMethod.GET)
     public List<MenuResponse> listMenu(){
         List<MenuResponse> items = new ArrayList<>();
 
@@ -64,7 +64,7 @@ public class MenuController {
      * @return
      */
     @CrossOrigin("*")
-    @RequestMapping(value = "/menus", method = RequestMethod.POST)
+    @RequestMapping(value = "/api/menus", method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.CREATED, code = HttpStatus.CREATED)
     public MenuResponse addMenu(@RequestBody MenuRequest request){
         Menu entity = new Menu();
@@ -103,7 +103,7 @@ public class MenuController {
 
 
     @CrossOrigin("*")
-    @RequestMapping(value = "/menus/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/api/menus/{id}", method = RequestMethod.GET)
     @ResponseStatus(value = HttpStatus.OK, code = HttpStatus.OK)
     public ResponseEntity<MenuResponse> getMenuDetail(@PathVariable Long id){
         Optional<Menu> optMenu = menuService.getMenubyId(id);
