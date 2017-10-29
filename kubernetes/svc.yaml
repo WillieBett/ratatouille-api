@@ -1,0 +1,12 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: ratatouille-api-svc
+spec:
+  selector:
+    app: ratatouille-api
+    tier: backend
+  ports:
+  - protocol: TCP
+    port: 8080
+    targetPort: http

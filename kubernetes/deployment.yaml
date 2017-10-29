@@ -1,0 +1,23 @@
+apiVersion: apps/v1beta1 # for versions before 1.8.0 use apps/v1beta1
+kind: Deployment
+metadata:
+  name: ratatouille-api-deployment
+  labels:
+    app: ratatouille-api
+    tier: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ratatouille-api
+  template:
+    metadata:
+      labels:
+        app: ratatouille-api
+        tier: backend
+    spec:
+      containers:
+      - name: ratatouille-api
+        image: gcr.io/ratatouille-179406/ratatouille-api:0.0.2-dev
+        ports:
+        - containerPort: 8080
