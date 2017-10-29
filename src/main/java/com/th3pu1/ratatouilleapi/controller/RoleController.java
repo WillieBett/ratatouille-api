@@ -7,9 +7,10 @@ import com.th3pu1.ratatouilleapi.service.RoleService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import com.th3pu1.ratatouilleapi.controller.exception.ResourceNotFoundException;
 
 import java.util.List;
 import java.util.Optional;

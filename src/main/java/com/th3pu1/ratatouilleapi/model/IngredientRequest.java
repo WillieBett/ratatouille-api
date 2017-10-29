@@ -1,9 +1,13 @@
 package com.th3pu1.ratatouilleapi.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.th3pu1.ratatouilleapi.entity.Category;
 import lombok.*;
 import org.springframework.boot.jackson.JsonComponent;
 
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import java.math.BigDecimal;
 
 /**

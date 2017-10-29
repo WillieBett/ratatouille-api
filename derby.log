@@ -1,11 +1,11 @@
 ----------------------------------------------------------------
-Sat Sep 16 00:45:12 ICT 2017:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.13.1.1 - (1765088): instance a816c00e-015e-86a4-fb80-000003ff4018 
-on database directory memory:/Users/pchaivong/sandbox/ratatouille-api/testdb with class loader sun.misc.Launcher$AppClassLoader@58644d46 
+Sun Oct 29 04:52:37 ICT 2017:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.13.1.1 - (1765088): instance a816c00e-015f-64f8-f1c0-0000043d8268 
+on database directory memory:/Users/pchaivong/workspace/ratatouille-api/testdb with class loader sun.misc.Launcher$AppClassLoader@58644d46 
 Loaded from file:/Users/pchaivong/.m2/repository/org/apache/derby/derby/10.13.1.1/derby-10.13.1.1.jar
 java.vendor=Oracle Corporation
 java.runtime.version=1.8.0_31-b13
-user.dir=/Users/pchaivong/sandbox/ratatouille-api
+user.dir=/Users/pchaivong/workspace/ratatouille-api
 os.name=Mac OS X
 os.arch=x86_64
 os.version=10.12.6

@@ -27,6 +27,12 @@ public class Menu {
     @Column(name = "price")
     private BigDecimal price;
 
+    @ManyToOne(targetEntity = Category.class, fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id", referencedColumnName = "id", nullable = false)
+    private Category category;
+
+
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name="menu_detail",
         joinColumns = @JoinColumn(name="menu_id"),

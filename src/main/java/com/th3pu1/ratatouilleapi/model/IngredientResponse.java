@@ -32,6 +32,7 @@ public class IngredientResponse {
     private BigDecimal costPerUnit;
 
 
+
     public IngredientResponse(Ingredient ingredient){
         this.id = ingredient.getId();
         this.name = ingredient.getName();

@@ -9,31 +9,17 @@ import org.springframework.http.HttpStatus;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import com.th3pu1.ratatouilleapi.controller.exception.ResourceNotFoundException;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by pchaivong on 9/2/2017 AD.
  */
 
-@ResponseStatus(value = HttpStatus.NOT_FOUND)
-class ResourceNotFoundException extends RuntimeException {
 
-    ResourceNotFoundException(String message){
-        super(message);
-    }
-
-    ResourceNotFoundException(){
-        super();
-    }
-
-
-
-    @Override
-    public String toString() {
-        return getMessage();
-    }
-}
 
 @RestController
 public class IngredientController {
@@ -56,10 +42,29 @@ public class IngredientController {
         return items;
     }
 
-    @RequestMapping(value = "/ingredients", method = RequestMethod.POST)
+
+    /**
+     * Create ingredient by specific category
+     *
+     * @param id
+     * @param request
+     * @return
+     */
+    @CrossOrigin("*")
+    @RequestMapping(value = "/api/categories/{id}/ingredients", method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.CREATED, code = HttpStatus.CREATED)
-    public void createIngredient(@RequestBody IngredientRequest request){
-        ingredientService.addIngredient(request);
+    public IngredientResponse createIngredient(@PathVariable Long id,
+                                               @RequestBody IngredientRequest request){
+
+        Optional<IngredientResponse> response = ingredientService.addIngredient(request, id);
+        return response.orElseThrow(ResourceNotFoundException::new);
+    }
+
+    @CrossOrigin("*")
+    @RequestMapping(value = "/api/categories/{id}/ingredients", method = RequestMethod.GET)
+    @ResponseStatus(value = HttpStatus.OK, code = HttpStatus.OK)
+    public List<IngredientResponse> getIngredientList(@PathVariable Long id){
+        return ingredientService.getIngredientsByCategory(id);
     }
 
     @RequestMapping(value = "/ingredients/{id}", method = RequestMethod.GET)
@@ -73,7 +78,9 @@ public class IngredientController {
         }
     }
 
-    @RequestMapping(value = "/ingredients/{id}", method = RequestMethod.PUT)
+
+    @CrossOrigin("*")
+    @RequestMapping(value = "/api/ingredients/{id}", method = RequestMethod.PUT)
     @ResponseStatus(value = HttpStatus.NO_CONTENT, code = HttpStatus.NO_CONTENT)
     @Transactional
     public void updateIngredient(@PathVariable Long id, @RequestBody IngredientRequest request){
@@ -96,7 +103,9 @@ public class IngredientController {
         }
     }
 
-    @RequestMapping(value = "/ingredients/{id}", method = RequestMethod.DELETE)
+
+    @CrossOrigin("*")
+    @RequestMapping(value = "/api/ingredients/{id}", method = RequestMethod.DELETE)
     @ResponseStatus(value = HttpStatus.NO_CONTENT, code = HttpStatus.NO_CONTENT)
     public void deleteIngredient(@PathVariable Long id){
         Ingredient ingredient = ingredientService.getIngredient(id);

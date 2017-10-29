@@ -1,16 +1,13 @@
 package com.th3pu1.ratatouilleapi.entity;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.math.BigDecimal;
 
 /**
  * Created by pchaivong on 9/2/2017 AD.
  */
 
+@Table(name = "ingredient")
 @Entity
 public class Ingredient {
 
@@ -24,6 +21,11 @@ public class Ingredient {
 
     private BigDecimal costPerUnit;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="category_id", referencedColumnName="id")
+    private Category category;
+
+
     public Ingredient() {
     }
 
@@ -33,6 +35,7 @@ public class Ingredient {
         this.price = price;
         this.costPerUnit = costPerUnit;
     }
+
 
     public long getId() {
         return id;
@@ -64,6 +67,14 @@ public class Ingredient {
 
     public void setCostPerUnit(BigDecimal costPerUnit) {
         this.costPerUnit = costPerUnit;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     @Override
