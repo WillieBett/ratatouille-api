@@ -1,9 +1,12 @@
 package com.th3pu1.ratatouilleapi.controller;
 
+import com.th3pu1.ratatouilleapi.controller.exception.ResourceNotFoundException;
+import com.th3pu1.ratatouilleapi.entity.Category;
 import com.th3pu1.ratatouilleapi.model.MenuRequest;
 import com.th3pu1.ratatouilleapi.model.MenuResponse;
 import com.th3pu1.ratatouilleapi.entity.Ingredient;
 import com.th3pu1.ratatouilleapi.entity.Menu;
+import com.th3pu1.ratatouilleapi.service.CategoryService;
 import com.th3pu1.ratatouilleapi.service.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,8 +25,15 @@ import java.util.stream.Collectors;
 @RestController
 public class MenuController {
 
-    @Autowired
     private MenuService menuService;
+    private CategoryService categoryService;
+
+
+    @Autowired
+    public MenuController(MenuService menuService, CategoryService categoryService){
+        this.menuService = menuService;
+        this.categoryService = categoryService;
+    }
 
 
     /**
@@ -40,17 +50,16 @@ public class MenuController {
             response.setId(menu.getId());
             response.setName(menu.getName());
             response.setDescription(menu.getDescription());
-            response.setPrice(menu.getPrice());
             response.setIngredients(menu.getIngredientList()
                                     .stream()
                                     .map(Ingredient::getId)
                                     .collect(Collectors.toList()));
 
-            response.setToppings(menu.getToppings()
+     /*       response.setToppings(menu.getToppings()
                                     .stream()
                                     .map(Ingredient::getId)
                                     .collect(Collectors.toList()));
-
+    */
             items.add(response);
         });
 
@@ -64,12 +73,14 @@ public class MenuController {
      * @return
      */
     @CrossOrigin("*")
-    @RequestMapping(value = "/api/menus", method = RequestMethod.POST)
+    @RequestMapping(value = "/api/categories/{categoryId}/menus", method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.CREATED, code = HttpStatus.CREATED)
-    public MenuResponse addMenu(@RequestBody MenuRequest request){
+    public MenuResponse addMenu(@RequestBody MenuRequest request,
+                                @PathVariable long categoryId){
+
+
         Menu entity = new Menu();
         entity.setName(request.getName());
-        entity.setPrice(request.getPrice());
         entity.setDescription(request.getDescription());
 
 
@@ -89,16 +100,18 @@ public class MenuController {
          */
         menuService.addLegitimateTopping(entity, request.getToppings());
 
+        if (categoryService.addMenu(categoryId, entity).isPresent()) {
+            Menu result = menuService.save(entity);
+            MenuResponse response = new MenuResponse();
+            response.setId(result.getId());
+            response.setName(result.getName());
+            response.setDescription(result.getDescription());
 
-
-        Menu result = menuService.save(entity);
-        MenuResponse response = new MenuResponse();
-        response.setId(result.getId());
-        response.setName(result.getName());
-        response.setPrice(result.getPrice());
-        response.setDescription(result.getDescription());
-
-        return response;
+            return response;
+        }
+        else {
+            throw new ResourceNotFoundException();
+        }
     }
 
 

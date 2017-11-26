@@ -1,5 +1,7 @@
 package com.th3pu1.ratatouilleapi.entity;
 
+import lombok.*;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -9,92 +11,49 @@ import java.util.List;
  * Created by pchaivong on 9/3/2017 AD.
  */
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@ToString
 @Entity
-@Table(name="menu")
+@Table(name="MENU")
 public class Menu {
 
     @Id
     @GeneratedValue
-    @Column(name = "id")
+    @Column(name = "ID")
     private Long Id;
 
-    @Column(name = "name")
+    @Column(name = "NAME")
     private String name;
 
-    @Column(name = "description")
+    @Column(name = "DESCRIPTION")
     private String description;
 
-    @Column(name = "price")
-    private BigDecimal price;
 
     @ManyToOne(targetEntity = Category.class, fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "CATEGORY_ID", referencedColumnName = "ID", nullable = false)
     private Category category;
+
+
+    @OneToMany(mappedBy = "menu")
+    private List<PriceSize> sizes;
 
 
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name="menu_detail",
-        joinColumns = @JoinColumn(name="menu_id"),
-        inverseJoinColumns = @JoinColumn(name = "ingredient_id"))
+    @JoinTable(name="MENU_DETAIL",
+        joinColumns = @JoinColumn(name="MENU_ID"),
+        inverseJoinColumns = @JoinColumn(name = "INGREDIENT_ID"))
     private List<Ingredient> ingredientList;
 
-
+/*
     @ManyToMany(cascade = CascadeType.REMOVE)
-    @JoinTable(name = "menu_addons",
-            joinColumns = @JoinColumn(name = "menu_id"),
-            inverseJoinColumns = @JoinColumn(name = "ingredient_id"))
+    @JoinTable(name = "MENU_ADDONS",
+            joinColumns = @JoinColumn(name = "MENU_ID"),
+            inverseJoinColumns = @JoinColumn(name = "INGREDIENT_ID"))
     private List<Ingredient> toppings;
 
-
-    public Menu() {
-    }
-
-    public List<Ingredient> getIngredientList() {
-        return ingredientList;
-    }
-
-    public void setIngredientList(List<Ingredient> ingredientList) {
-        this.ingredientList = ingredientList;
-    }
-
-    public List<Ingredient> getToppings() {
-        return toppings;
-    }
-
-    public void setToppings(List<Ingredient> toppings) {
-        this.toppings = toppings;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Long getId() {
-        return Id;
-    }
-
-    public void setId(Long id) {
-        Id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
+*/
 }

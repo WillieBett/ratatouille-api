@@ -54,6 +54,28 @@ public class CategoryService {
 
 
     /**
+     * Add menu to existing category
+     * @param categoryId
+     * @param menu
+     * @return
+     */
+    public Optional<Category> addMenu(long categoryId, Menu menu){
+
+        Category category = categoryRepository.findOne(categoryId);
+        if (category != null){
+            List<Menu> menus = category.getMenus();
+            menus.add(menu);
+            category.setMenus(menus);
+            menu.setCategory(category);
+            return Optional.of(category);
+        }
+        else {
+            return Optional.empty();
+        }
+    }
+
+
+    /**
      * Add new Category
      * @param name
      * @param kitchenEnabled
@@ -112,7 +134,7 @@ public class CategoryService {
         resp.setName(category.getName());
         resp.setKitchen_enabled(category.isKitchen_enabled());
 
-        Set<Menu> menus = category.getMenus();
+        List<Menu> menus = category.getMenus();
         if (menus==null){
             resp.setMenuItems(0);
         }
@@ -120,7 +142,7 @@ public class CategoryService {
             resp.setMenuItems(menus.size());
         }
 
-        Set<Ingredient> ingredients = category.getIngredients();
+        List<Ingredient> ingredients = category.getIngredients();
         if (ingredients == null){
             resp.setIngredientItems(0);
         }

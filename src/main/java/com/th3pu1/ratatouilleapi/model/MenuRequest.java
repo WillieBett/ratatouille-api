@@ -35,4 +35,7 @@ public class MenuRequest {
 
     @JsonProperty("toppings")
     private List<Long> toppings;
+
+    @JsonProperty("prices")
+    private List<PriceSize> prices;
 }

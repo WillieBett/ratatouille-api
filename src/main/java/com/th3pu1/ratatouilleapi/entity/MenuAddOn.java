@@ -1,6 +1,9 @@
 package com.th3pu1.ratatouilleapi.entity;
 
+import lombok.*;
+
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by pchaivong on 9/9/2017 AD.
@@ -11,46 +14,37 @@ import javax.persistence.*;
  * For valid add-on items list that customer can make order.
  * Basically almost the same concept as `MenuDetail`
  */
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@ToString
 @Entity
-@Table(name = "menu_addons")
+@Table(name = "MENU_ADDONS")
 public class MenuAddOn {
 
     @Id
     @GeneratedValue
-    @Column(name="id")
+    @Column(name="ID")
     private Long id;
 
 
-    @Column(name="menu_id")
-    private Long menuId;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "MENU",
+        joinColumns = @JoinColumn(name = "MENU_ID"),
+            inverseJoinColumns = @JoinColumn(name = "MENU_ADDON_ID")
 
-    @Column(name = "ingredient_id")
-    private Long ingredientId;
+    )
+    private List<Menu> menus;
 
-    public MenuAddOn() {
-    }
 
-    public Long getId() {
-        return id;
-    }
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "INGREDIENT",
+            joinColumns = @JoinColumn(name = "INGREDIENT_ID"),
+            inverseJoinColumns = @JoinColumn(name = "MENU_ADDON_ID")
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    )
+    private List<Menu> ingredients;
 
-    public Long getMenuId() {
-        return menuId;
-    }
-
-    public void setMenuId(Long menuId) {
-        this.menuId = menuId;
-    }
-
-    public Long getIngredientId() {
-        return ingredientId;
-    }
-
-    public void setIngredientId(Long ingredientId) {
-        this.ingredientId = ingredientId;
-    }
 }

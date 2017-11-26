@@ -20,14 +20,20 @@ import java.util.stream.Collectors;
 @Service
 public class MenuService {
 
-    @Autowired
     private MenuRepository menuRepository;
-
-    @Autowired
     private IngredientRepository ingredientRepository;
 
 
+    @Autowired
+    public MenuService(MenuRepository menuRepository,
+                       IngredientRepository ingredientRepository){
+        this.menuRepository = menuRepository;
+        this.ingredientRepository = ingredientRepository;
+    }
+
+
     public Menu save(Menu menu){
+
         return menuRepository.save(menu);
     }
 
@@ -71,6 +77,6 @@ public class MenuService {
                     .filter(Objects::nonNull)
                     .collect(Collectors.toList());
 
-        menu.setToppings(toppings);
+
     }
 }

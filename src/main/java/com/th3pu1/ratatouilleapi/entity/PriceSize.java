@@ -6,7 +6,9 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 
 /**
- * Created by pchaivong on 9/2/2017 AD.
+ * Each menu can have a few options depends on its size
+ * And each size will have different price depends on
+ * configuration
  */
 
 @NoArgsConstructor
@@ -14,28 +16,26 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 @ToString
-@Table(name = "INGREDIENT")
+@Table(name = "PRICE_SIZE")
 @Entity
-public class Ingredient {
+public class PriceSize {
 
     @Id
     @GeneratedValue
     @Column(name = "ID")
     private long id;
 
-    @Column(name = "NAME")
-    private String name;
+
+    @Column(name = "SIZE")
+    private String size;
 
     @Column(name = "PRICE")
     private BigDecimal price;
 
 
-    @Column(name = "COST_PER_UNIT")
-    private BigDecimal costPerUnit;
-
-
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="CATEGORY_ID", referencedColumnName="ID")
-    private Category category;
+    @JoinColumn(name = "MENU_ID", referencedColumnName = "ID")
+    private Menu menu;
+
 
 }
